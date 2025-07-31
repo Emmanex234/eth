@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereum Double Bonus Airdrop | 10 Years of ETH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(138, 99, 210, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(138, 99, 210, 0.8); }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .hero-bg {
+            background-image: url('https://ethereum.org/_next/image/?url=%2F_next%2Fstatic%2Fmedia%2Fhero.94a1ecc4.png&w=1504&q=75');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .float { animation: float 4s ease-in-out infinite; }
+        .pulse { animation: pulse 2s ease-in-out infinite; }
+        .glow { animation: glow 2s ease-in-out infinite; }
+        .slide-in { animation: slideIn 0.5s ease-out forwards; }
+        
+        .eth-gradient {
+            background: linear-gradient(135deg, #8a63d2 0%, #3b00b9 100%);
+        }
+        
+        .text-eth {
+            background: linear-gradient(135deg, #8a63d2, #3b00b9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-900 text-white">
+    <!-- Header -->
+    <header class="bg-black bg-opacity-80 py-4 sticky top-0 z-50 backdrop-blur-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                        <i class="fab fa-ethereum text-purple-600 text-2xl"></i>
+                    </div>
+                    <span class="text-xl font-bold">Ethereum Airdrop</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <span class="text-sm font-medium bg-purple-600 px-3 py-1 rounded-full">10 Years of ETH</span>
+                    <a href="#" class="hover:text-purple-400 transition">About</a>
+                    <a href="#" class="hover:text-purple-400 transition">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg relative py-20 md:py-32">
+        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <div class="max-w-4xl mx-auto">
+                <div class="float mb-8">
+                    <div class="w-24 h-24 mx-auto bg-white bg-opacity-20 rounded-full flex items-center justify-center pulse glow">
+                        <i class="fab fa-ethereum text-5xl text-white"></i>
+                    </div>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    <span class="text-eth">Double Bonus</span> Ethereum Airdrop
+                </h1>
+                <p class="text-xl md:text-2xl mb-8">
+                    Celebrating 10 Years of Ethereum with 2000 ETH Giveaway
+                </p>
+                <div class="flex flex-col md:flex-row justify-center gap-4 mb-12">
+                    <div class="bg-purple-600 text-white px-6 py-2 rounded-full inline-block">
+                        <span class="font-semibold">🚀 Limited Time Offer</span>
+                    </div>
+                    <div class="bg-yellow-500 text-black px-6 py-2 rounded-full inline-block">
+                        <span class="font-semibold">2X Bonus for Early Participants</span>
+                    </div>
+                </div>
+                
+                <div class="max-w-2xl mx-auto bg-black bg-opacity-50 rounded-xl p-6 backdrop-blur-sm border border-purple-900">
+                    <h3 class="text-xl font-bold mb-4">Total Airdrop: 2000 ETH</h3>
+                    <p class="text-purple-300 mb-6">Airdrop will end when all 2000 ETH is fully distributed</p>
+                    <button id="generateBtn" class="w-full eth-gradient text-white py-4 px-8 rounded-xl text-lg font-bold hover:shadow-lg transform hover:scale-[1.02] transition-all duration-200 mb-4">
+                        Generate Deposit Address
+                    </button>
+                    <p class="text-sm text-gray-300">Send ETH to your unique deposit address to receive 2X airdrop</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-16">
+        <!-- Address Display Section -->
+        <section class="bg-gray-800 rounded-2xl shadow-2xl p-8 mb-12 border border-gray-700">
+            <div class="max-w-2xl mx-auto">
+                <div id="addressDisplay" class="hidden bg-gray-900 rounded-xl p-6 border border-purple-900">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-sm font-semibold text-purple-400">Your ETH Deposit Address:</span>
+                        <button id="copyBtn" class="text-purple-400 hover:text-purple-300 text-sm font-medium flex items-center space-x-1 transition">
+                            <i class="far fa-copy"></i>
+                            <span>Copy</span>
+                        </button>
+                    </div>
+                    <div id="currentAddress" class="bg-black border-2 border-dashed border-purple-800 rounded-lg p-4 font-mono text-sm break-all text-purple-300"></div>
+                    <div class="mt-4 p-3 bg-purple-900 bg-opacity-30 rounded-lg">
+                        <p class="text-xs text-purple-200 flex items-start">
+                            <i class="fas fa-exclamation-circle mt-1 mr-2"></i>
+                            <span>Send only ETH to this address. Sending other tokens may result in permanent loss.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Airdrop Activity -->
+        <section class="bg-gray-800 rounded-2xl shadow-2xl p-8 mb-12 border border-gray-700">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold">Live Airdrop Distribution</h3>
+                <div class="flex items-center space-x-2">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    <span class="text-sm text-green-400">Active</span>
+                </div>
+            </div>
+            <div class="bg-gray-900 rounded-xl p-4 h-64 overflow-y-auto border border-gray-700" id="activityFeed">
+                <div class="flex items-center justify-center h-full">
+                    <p class="text-gray-500">Airdrop distribution activity will appear here...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instructions Section -->
+        <section class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-gray-800 rounded-2xl shadow-2xl p-8 border border-gray-700">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-info-circle text-purple-400 mr-3"></i>
+                    <span>Airdrop Instructions</span>
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="flex-shrink-0 mt-1">
+                            <div class="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center">
+                                <span class="text-xs font-bold">1</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Generate Deposit Address</h4>
+                            <p class="text-gray-400 text-sm">Click the button above to generate your unique ETH deposit address</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="flex-shrink-0 mt-1">
+                            <div class="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center">
+                                <span class="text-xs font-bold">2</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Send ETH to Address</h4>
+                            <p class="text-gray-400 text-sm">Transfer any amount of ETH to your generated deposit address</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="flex-shrink-0 mt-1">
+                            <div class="w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center">
+                                <span class="text-xs font-bold">3</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Receive Double Airdrop</h4>
+                            <p class="text-gray-400 text-sm">You'll receive double the amount you sent as airdrop within 24 hours</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-800 rounded-2xl shadow-2xl p-8 border border-gray-700">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-shield-alt text-purple-400 mr-3"></i>
+                    <span>Security Information</span>
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="flex-shrink-0 mt-1 text-green-400">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Official Ethereum Network</h4>
+                            <p class="text-gray-400 text-sm">This airdrop runs on the official Ethereum blockchain</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="flex-shrink-0 mt-1 text-red-400">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">No Private Keys Needed</h4>
+                            <p class="text-gray-400 text-sm">Never share your private keys or seed phrase with anyone</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="flex-shrink-0 mt-1 text-yellow-400">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Limited Time Offer</h4>
+                            <p class="text-gray-400 text-sm">Airdrop ends when all 2000 ETH is distributed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10 Years of Ethereum Celebration -->
+        <section class="bg-gradient-to-r from-purple-900 to-gray-900 rounded-2xl p-8 mb-12 border border-purple-800">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
+                    <div class="w-32 h-32 bg-white bg-opacity-10 rounded-full flex items-center justify-center border-2 border-purple-500 pulse">
+                        <span class="text-4xl font-bold text-white">10</span>
+                    </div>
+                </div>
+                <div class="md:w-2/3 text-center md:text-left">
+                    <h3 class="text-3xl font-bold mb-4">Celebrating 10 Years of Ethereum</h3>
+                    <p class="text-lg text-purple-200 mb-6">
+                        Join us in celebrating Ethereum's decade of innovation with this special double bonus airdrop.
+                        Since its launch in 2015, Ethereum has revolutionized decentralized applications and smart contracts.
+                    </p>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="https://ethereum.org/en/" target="_blank" class="bg-white text-black px-6 py-2 rounded-full font-medium hover:bg-gray-200 transition">
+                            <i class="fab fa-ethereum mr-2"></i> Learn About Ethereum
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="flex justify-center mb-6">
+                    <i class="fab fa-ethereum text-4xl text-purple-500"></i>
+                </div>
+                <p class="text-gray-400 mb-4">Official Ethereum Double Bonus Airdrop</p>
+                
+                <div class="flex justify-center space-x-4 mt-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-discord"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ETH deposit addresses
+        const ethAddresses = [
+            '0x1E092d93628373896fBd127C026c5473673baDA3',
+            '0x606D286c5B10F1eE625D07213D9ACC2D1F5C758C',
+            '0xdFCd15A40E2Ee8eb0Eec3e6B9A8CcC54E96Ab9D4'
+        ];
+        
+        let currentAddressIndex = 0;
+        
+        // Sample usernames for activity simulation
+        const sampleUsers = [
+            'CryptoTrader', 'DeFiEnthusiast', 'ETHHolder', 'BlockchainDev', 
+            'Web3Builder', 'SmartContractor', 'NFTCollector', 'AirdropHunter',
+            'CryptoWhale', 'StakingMaster', 'DAOMember', 'EthereumFan'
+        ];
+        
+        // Sample amounts for simulation
+        const sampleAmounts = [0.1, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 2.5, 3.0, 5.0];
+
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            const addressDisplay = document.getElementById('addressDisplay');
+            const currentAddressEl = document.getElementById('currentAddress');
+            
+            // Show the address display
+            addressDisplay.classList.remove('hidden');
+            addressDisplay.classList.add('slide-in');
+            
+            // Set the current address
+            currentAddressEl.textContent = ethAddresses[currentAddressIndex];
+            
+            // Move to next address for next generation
+            currentAddressIndex = (currentAddressIndex + 1) % ethAddresses.length;
+            
+            // Add activity log
+            addActivity('Generated deposit address');
+        });
+
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            const addressText = document.getElementById('currentAddress').textContent;
+            navigator.clipboard.writeText(addressText).then(function() {
+                const copyBtn = document.getElementById('copyBtn');
+                const originalHtml = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check mr-1"></i> Copied!';
+                copyBtn.classList.remove('text-purple-400');
+                copyBtn.classList.add('text-green-400');
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalHtml;
+                    copyBtn.classList.remove('text-green-400');
+                    copyBtn.classList.add('text-purple-400');
+                }, 2000);
+            });
+        });
+
+        // Simulate airdrop activity
+        function addActivity(action) {
+            const activityFeed = document.getElementById('activityFeed');
+            
+            // Clear initial message if present
+            if (activityFeed.children.length === 1 && activityFeed.firstChild.classList.contains('flex')) {
+                activityFeed.innerHTML = '';
+            }
+            
+            const activity = document.createElement('div');
+            activity.className = 'flex items-center space-x-3 p-3 bg-gray-800 rounded-lg mb-2 slide-in border border-gray-700';
+            
+            const randomUser = sampleUsers[Math.floor(Math.random() * sampleUsers.length)];
+            const randomAmount = sampleAmounts[Math.floor(Math.random() * sampleAmounts.length)];
+            const randomAddress = ethAddresses[Math.floor(Math.random() * ethAddresses.length)];
+            
+            if (action === 'Generated deposit address') {
+                activity.innerHTML = `
+                    <div class="flex-shrink-0">
+                        <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-qrcode text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-sm">
+                            <span class="font-semibold">${randomUser}</span>
+                            <span class="text-gray-400">generated deposit address</span>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1">${new Date().toLocaleTimeString()}</div>
+                    </div>
+                `;
+            } else {
+                const airdropAmount = (randomAmount * 2).toFixed(2);
+                activity.innerHTML = `
+                    <div class="flex-shrink-0">
+                        <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-gift text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-sm">
+                            <span class="font-semibold">${randomUser}</span>
+                            <span class="text-gray-400">received</span>
+                            <span class="text-green-400 font-bold">${airdropAmount} ETH</span>
+                            <span class="text-gray-400">from airdrop</span>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1">${new Date().toLocaleTimeString()}</div>
+                    </div>
+                `;
+            }
+            
+            // Remove first child if more than 8 activities
+            if (activityFeed.children.length > 8) {
+                activityFeed.removeChild(activityFeed.firstChild);
+            }
+            
+            activityFeed.appendChild(activity);
+            activityFeed.scrollTop = activityFeed.scrollHeight;
+        }
+
+        // Add initial activity message
+        setTimeout(() => {
+            document.getElementById('activityFeed').innerHTML = '';
+            // Add some initial activities
+            addActivity('Generated deposit address');
+            addActivity('Airdrop received');
+            addActivity('Airdrop received');
+        }, 1000);
+
+        // Add new activity every 3-8 seconds
+        setInterval(() => {
+            const actions = ['Generated deposit address', 'Airdrop received'];
+            const randomAction = actions[Math.floor(Math.random() * actions.length)];
+            addActivity(randomAction);
+        }, Math.random() * 5000 + 3000);
+    </script>
+</body>
+</html>
