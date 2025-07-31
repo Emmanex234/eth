@@ -48,6 +48,51 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+
+        .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    animation: moveHorizontal 15s linear infinite;
+}
+
+.logo-wrapper img {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid #e5e7eb;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+@keyframes moveHorizontal {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.logo-set {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-shrink: 0;
+}
     </style>
 </head>
 <body class="min-h-screen bg-gray-900 text-white">
@@ -260,7 +305,27 @@
                     <i class="fab fa-ethereum text-4xl text-purple-500"></i>
                 </div>
                 <p class="text-gray-400 mb-4">Official Ethereum Double Bonus Airdrop</p>
-                
+                <p class="text-sm text-gray-600 max-w-2xl mx-auto mb-4">
+                    Backed by Binance, KuCoin, Bybit, Coinbase Exchange, TrustWallet etc
+                </p>
+                <div class="logo-container">
+        <div class="logo-wrapper">
+            <div class="logo-set">
+                <img src="https://th.bing.com/th/id/OIP.x04j807i1HmIuSU7pV7TzAHaHa?w=80&h=80&c=1&bgcl=d3c2c8&r=0&o=7&cb=thwsc4&pid=ImgRC&rm=3" alt="Binance" title="Binance">
+                <img src="https://th.bing.com/th/id/OIP.BE0eN4EMJ7VVkGJduWWfegHaGL?w=209&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="KuCoin" title="KuCoin">
+                <img src="https://th.bing.com/th?q=Bybit+Logo+Twitter&w=120&h=120&c=1&rs=1&qlt=70&o=7&cb=1&pid=InlineBlock&rm=3&mkt=en-WW&cc=NG&setlang=en&adlt=moderate&t=1&mw=247" alt="Bybit" title="Bybit">
+                <img src="https://th.bing.com/th/id/OIP._gu0I5VnPiyFUPUs7IFvuQHaHa?w=163&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Coinbase" title="Coinbase">
+                <img src="https://ts2.mm.bing.net/th?id=OIP.3kyHvjJvrDgcPbra_i1I1QAAAA&pid=15.1" alt="TrustWallet" title="TrustWallet">
+            </div>
+            <div class="logo-set">
+                <img src="https://th.bing.com/th/id/OIP.x04j807i1HmIuSU7pV7TzAHaHa?w=80&h=80&c=1&bgcl=d3c2c8&r=0&o=7&cb=thwsc4&pid=ImgRC&rm=3" alt="Binance" title="Binance">
+                <img src="https://th.bing.com/th/id/OIP.BE0eN4EMJ7VVkGJduWWfegHaGL?w=209&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="KuCoin" title="KuCoin">
+                <img src="https://th.bing.com/th?q=Bybit+Logo+Twitter&w=120&h=120&c=1&rs=1&qlt=70&o=7&cb=1&pid=InlineBlock&rm=3&mkt=en-WW&cc=NG&setlang=en&adlt=moderate&t=1&mw=247" alt="Bybit" title="Bybit">
+                <img src="https://th.bing.com/th/id/OIP._gu0I5VnPiyFUPUs7IFvuQHaHa?w=163&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Coinbase" title="Coinbase">
+                <img src="https://ts2.mm.bing.net/th?id=OIP.3kyHvjJvrDgcPbra_i1I1QAAAA&pid=15.1" alt="TrustWallet" title="TrustWallet">
+            </div>
+        </div>
+    </div>
                 <div class="flex justify-center space-x-4 mt-6">
                     <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
                     <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-discord"></i></a>
